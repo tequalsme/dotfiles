@@ -1,0 +1,43 @@
+alias c=clear
+alias cp="cp -p"
+alias d="dirs"
+alias ff="find . -name"
+alias grep="grep --color=auto"
+alias g=grep
+alias h=history
+
+#alias ls="ls --color=auto --show-control-chars"
+alias ls="ls -G"
+# doesn't work in iTerm
+#alias l="ls -o"
+alias l="ls -l"
+alias l1="ls -1"
+alias la="l -A"
+alias lt="l -t"
+alias lat="l -At"
+# backward compatibility
+alias ll=l
+
+# old ones
+#alias la="ls -al"
+#alias ll="ls -l"
+#alias lf="ls -lF"
+#alias lo="ls -o"
+#alias lt="ls -lt"
+
+alias less="less -qi"
+alias p="pushd"
+alias pd="popd"
+alias scp="scp -p"
+#alias scratch="cat > /dev/null"
+#alias ssh="ssh -X"
+alias tf="tail -f"
+alias vi=vim
+alias x=exit
+
+#alias patch="patch -p0 -i"
+
+alias mvnfull='mvn clean install'
+alias mvnquick='mvn clean install -DskipTests=true'
+
+alias greppom='find . -name pom.xml -print0 | xargs -0 grep "$@"'

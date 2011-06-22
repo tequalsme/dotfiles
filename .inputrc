@@ -1,0 +1,14 @@
+# Allow 8-bit input/output
+#set meta-flag on
+#set convert-meta off
+#set input-meta on
+#set output-meta on
+#
+# in "if bash" block
+set bell-style visible
+set completion-ignore-case on
+# questionable whether I like this one or not
+#set match-hidden-files on
+# never got this one to work
+#Space: magic-space
+

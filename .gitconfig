@@ -1,0 +1,40 @@
+[user]
+        name = Tim Reardon
+        email = tequalsme@gmail.com
+[color]
+        diff = auto
+        status = auto
+        branch = auto
+        interactive = auto
+[alias]
+        st = status
+        ci = commit
+        br = branch
+        ch = checkout
+        co = checkout
+        di = diff
+        undo = reset --soft HEAD^
+        #serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
+        l = log --pretty='%h %ad %an %s' --date=local
+        lg = log -p
+        who = shortlog -s --
+        changes=diff --name-status -r
+        diffstat=diff --stat -r
+        prune-all = !git remote | xargs -n 1 git remote prune
+        spull = !git-svn fetch && git-svn rebase
+        sup = !git-svn fetch && git-svn rebase
+        spush = !git-svn dcommit
+[push]
+        default = tracking
+[pull]
+        default = tracking
+[diff]
+        tool = diffmerge
+#[mergetool "diffmerge"]
+#        cmd = diffmerge.sh --merge --result=$MERGED $LOCAL $BASE $REMOTE
+#        trustExitCode = true
+[difftool "diffmerge"]
+        cmd = diffmerge.sh \"$LOCAL\" \"$REMOTE\"
+[core]
+	    excludesfile = /Users/treardon/.gitignore
+	    autocrlf = input
