@@ -1,6 +1,9 @@
 [user]
         name = Tim Reardon
         email = tequalsme@gmail.com
+[core]
+        excludesfile = ~/.gitignore
+        autocrlf = input
 [color]
         diff = auto
         status = auto
@@ -35,6 +38,3 @@
 #        trustExitCode = true
 [difftool "diffmerge"]
         cmd = diffmerge.sh \"$LOCAL\" \"$REMOTE\"
-[core]
-	    excludesfile = /Users/treardon/.gitignore
-	    autocrlf = input

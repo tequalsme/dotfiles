@@ -1,3 +1,19 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+# User specific aliases and functions
+export JAVA_HOME=/usr/java/latest
+
+export M2_HOME=/opt/maven/current
+export M2=$M2_HOME/bin
+export MAVEN_OPTS="-Xms512m -Xmx1024m"
+
+export PATH=$PATH:$HOME/bin:$M2
+
 set -o notify
 shopt -s nocaseglob
 shopt -s histappend
