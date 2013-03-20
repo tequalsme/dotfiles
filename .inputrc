@@ -1,3 +1,5 @@
+# modified from /etc/defaults/etc/skel/.inputrc thusly:
+
 # Allow 8-bit input/output
 #set meta-flag on
 #set convert-meta off

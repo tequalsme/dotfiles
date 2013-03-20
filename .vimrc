@@ -117,4 +117,4 @@ set laststatus=2
 set statusline=%<%f\ %a%h%m%r%=%-14.(%l,%c%V%)\ %P
 
 " F2 to toggle paste mode
-set pastetoggle=<F5>
+set pastetoggle=<F2>
