@@ -1,4 +1,4 @@
-alias c=clear
+#alias c=clear
 alias cp="cp -p"
 alias d="dirs"
 alias ff="find . -name"
@@ -8,16 +8,17 @@ alias h=history
 
 alias ls="ls -G --color=auto"
 alias l="ls -l"
-alias l1="ls -1"
 alias la="l -A"
 alias lt="l -t"
 alias lat="l -At"
+alias l1="ls -1"
 
 alias less="less -qi"
 alias p="pushd"
 alias pd="popd"
 alias scp="scp -p"
 alias scratch="cat > /dev/null"
+alias ssh="ssh -A"
 #alias ssh="ssh -X"
 alias tf="tail -f"
 alias vi=vim

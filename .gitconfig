@@ -2,24 +2,29 @@
         name = Tim Reardon
         email = tequalsme@gmail.com
 [core]
-        excludesfile = ~/.gitignore
+        eol = lf
+        editor = vi
         autocrlf = input
+        safecrlf = true
+        excludesfile = /path/to/.gitignore
 [color]
-        diff = auto
-        status = auto
         branch = auto
+        diff = auto
         interactive = auto
+        status = auto
+        ui = auto
 [alias]
-        st = status
-        ci = commit
         br = branch
+        ci = commit
         ch = checkout
         co = checkout
         di = diff
+        st = status
         undo = reset --soft HEAD^
         #serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
         l = log --pretty='%h %ad %an %s' --date=local
         lg = log -p
+        summ = log --name-only
         who = shortlog -s --
         changes=diff --name-status -r
         diffstat=diff --stat -r
@@ -27,14 +32,24 @@
         spull = !git-svn fetch && git-svn rebase
         sup = !git-svn fetch && git-svn rebase
         spush = !git-svn dcommit
+        upsub = !git submodule update --init
 [push]
         default = tracking
 [pull]
         default = tracking
 [diff]
-        tool = diffmerge
+        mnemonicprefix = 1
+        renamed = copy
+        #tool = diffmerge
+[difftool "diffmerge"]
+        cmd = diffmerge.sh \"$LOCAL\" \"$REMOTE\"
 #[mergetool "diffmerge"]
 #        cmd = diffmerge.sh --merge --result=$MERGED $LOCAL $BASE $REMOTE
 #        trustExitCode = true
-[difftool "diffmerge"]
-        cmd = diffmerge.sh \"$LOCAL\" \"$REMOTE\"
+#[http]
+#    sslCert = /path/to/cert.pem
+#    sslCertPasswordProtected = true
+#    sslVerify = true
+#    sslCAInfo = /path/to/cert.crt
+#[mailmap]
+#    file = /path/to/.gitmailmap

@@ -1,0 +1,66 @@
+# --------------------------
+# Env
+# --------------------------
+export JAVA_HOME=/usr/java/latest
+
+export M2_HOME=/opt/maven/current
+export MAVEN_OPTS="-Xms512m -Xmx1024m -XX:MaxPermSize=512m"
+
+export ZOOKEEPER_HOME=/opt/zookeeper/current
+export HADOOP_HOME=/opt/hadoop/current
+export ACCUMULO_HOME=/opt/accumulo/current
+
+export PATH=$PATH:$HOME/bin:$M2_HOME/bin:$ZOOKEEPER_HOME/bin:$HADOOP_HOME/bin:$ACCUMULO_HOME/bin
+
+export EDITOR=vim
+VISUAL=vim
+
+# --------------------------
+# Shell Options
+# --------------------------
+
+# Don't wait for job termination
+set -o notify
+
+# Use case-insensitive filename globbing
+shopt -s nocaseglob
+
+# Make bash append rather than overwrite history on disk
+shopt -s histappend
+
+# When changing directory, small typos can be ignored by bash.
+# For example, cd /vr/lg/apaache would find /var/log/apache
+shopt -s cdspell
+
+# --------------------------
+# History
+# --------------------------
+export HISTSIZE=10000
+export HISTCONTROL=erasedups
+
+# --------------------------
+# Git
+# --------------------------
+
+# git prompt if possible
+if type -t __git_ps1 > /dev/null 2>&1; then
+    GIT_PS1_SHOWDIRTYSTATE=1
+    GIT_PS1_SHOWSTASHSTATE=1
+    GIT_PS1_SHOWUNTRACKEDFILES=1
+    PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+else
+    # default prompt (user@host and current dir)
+    PS1='[\[\e[0m\]\u@\h \[\e[34m\]\W\[\e[0m\]] \$ '
+fi
+
+# -OR- if git completion not built-in, do this:
+#if [ -f /path/to/git-completion.sh ]; then
+#    source /path/to/git-completion.sh
+#    GIT_PS1_SHOWDIRTYSTATE=1
+#    GIT_PS1_SHOWSTASHSTATE=1
+#    GIT_PS1_SHOWUNTRACKEDFILES=1
+#    PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+#else
+#    # default prompt (user@host and current dir)
+#    PS1='[\[\e[0m\]\u@\h \[\e[34m\]\W\[\e[0m\]] \$ '
+#fi
