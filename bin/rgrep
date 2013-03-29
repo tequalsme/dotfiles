@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# skip the following directories:
+#  ./.git
+#  */.svn
+# */target
+find . -path ./.git -prune -o \
+       -path "*/.svn" -prune -o \
+       -path "*/target" -prune -o \
+       -type f -print0 | xargs -0 grep "${@}"
