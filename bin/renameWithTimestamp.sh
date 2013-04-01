@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-if [ $# -ne 1]; then
+if [ $# -ne 1 ]; then
     echo "Usage: $0 filename"
     echo "Renames the given file with a timestamp (millis) extension"
     exit 1
