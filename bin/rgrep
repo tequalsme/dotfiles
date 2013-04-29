@@ -1,9 +1,9 @@
 #!/bin/sh
 
 # skip the following directories:
-#  ./.git
-#  */.svn
-# */target
+#   ./.git
+#   */.svn
+#   */target
 find . -path ./.git -prune -o \
        -path "*/.svn" -prune -o \
        -path "*/target" -prune -o \

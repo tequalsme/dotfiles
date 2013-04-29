@@ -1,4 +1,5 @@
 #!/bin/sh
+
 # Usage:
 #
 # $0 artifact pomFile

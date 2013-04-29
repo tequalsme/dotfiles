@@ -1,4 +1,5 @@
 #!/bin/sh
+
 set -e
 
 usage() {
@@ -9,7 +10,6 @@ usage() {
     echo "    -f  from millis to readable string (default)"
     echo "    -t  from string to millis"
     echo "    -u  Use UTC (valid for -f only)"
-    echo ""
     echo "Examples:"
     echo "  $0 1364821657000"
     echo "  $0 -t \"Mon Apr  1 07:19:35 EDT 2013\""
