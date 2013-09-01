@@ -1,0 +1,12 @@
+sudo alternatives --install /usr/bin/java java /usr/java/default/bin/java 2 \
+--slave /usr/bin/javac javac /usr/java/default/bin/javac \
+--slave /usr/bin/javadoc javadoc /usr/java/default/bin/javadoc \
+--slave /usr/bin/jar jar /usr/java/default/bin/jar \
+--slave /usr/bin/keytool keytool /usr/java/default/bin/keytool \
+--slave /usr/bin/orbd orbd /usr/java/default/bin/orbd \
+--slave /usr/bin/pack200 pack200 /usr/java/default/bin/pack200 \
+--slave /usr/bin/rmid rmid /usr/java/default/bin/rmid \
+--slave /usr/bin/rmiregistry rmiregistry /usr/java/default/bin/rmiregistry \
+--slave /usr/bin/servertool servertool /usr/java/default/bin/servertool \
+--slave /usr/bin/tnameserv tnameserv /usr/java/default/bin/tnameserv \
+--slave /usr/bin/unpack200 unpack200 /usr/java/default/bin/unpack200

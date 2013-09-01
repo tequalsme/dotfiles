@@ -1,0 +1,55 @@
+#!/bin/bash
+
+_go-usage() {
+    echo "go/host functions"
+    echo "  go [host]       - ssh into given host"
+    echo "  host get [host] - retrieve given host property"
+    echo "  host list       - display all host properties"
+    echo "  host file       - display location of hosts properties file"
+}
+
+_host-file() {
+    echo "$GO_DIR/hosts.properties"
+}
+
+_host-list() {
+    cat $(_host-file) | grep -v "^$" | grep -v "^#" | sort
+}
+
+_host-get() {
+    local host=$(grep "^${1}=" $(_host-file) | tail -n 1)
+
+    if [ -z "$1" ] || [ -z ${host} ]; then
+        echo
+        return
+    fi
+
+    echo ${host} | cut -d '=' -f2-
+}
+
+host() {
+    if [ $# -eq 0 ]; then
+        _go-usage
+        return 1
+    fi
+
+    local cmd=_host-${1}
+    shift 1
+    if [ ! -z $(declare -F ${cmd}) ]; then
+        ${cmd} $@
+        return $?
+    else
+        _go-usage
+        return 1
+    fi
+    return 1
+}
+
+# ssh to a server
+go() {
+    if [ $# -ne 1 ]; then
+        _go-usage
+        return 1
+    fi
+    ssh $(_host-get $1)
+}

@@ -1,0 +1,22 @@
+=== README ===
+go/host functions
+  for user when user cannot edit /etc/hosts
+
+  go [host]       - ssh into given host
+  host get [host] - retrieve given host property
+  host list       - display all host properties
+  host file       - display location of hosts properties file
+
+=== SETUP ===
+
+Either cp -r .go/ ~
+ -or-
+ln -s /path/to/.go ~/.go
+
+Add the following to ~/.bashrc:
+
+if [ -f ~/.go/env ]; then
+    . ~/.go/env
+fi
+
+Add "host=IP" entries to hosts.properties

@@ -1,0 +1,55 @@
+#!/bin/sh
+
+# launches ssh-agent, if not already running, and adds keys
+
+SSH_ENV="${HOME}/.ssh/environment"
+
+function add_keys() {
+    ssh-add
+}
+
+function start_agent() {
+  echo "Initializing new ssh-agent..."
+  ssh-agent | sed 's/^echo/#echo/' > "$SSH_ENV"
+  echo succeeded
+  chmod 600 "$SSH_ENV"
+  . "$SSH_ENV" > /dev/null
+  add_keys
+}
+
+function test_identities() {
+  # test whether standard identities have been added to the agent already
+  ssh-add -l | grep "The agent has no identities" > /dev/null
+  if [ $? -eq 0 ]; then
+    add_keys
+    # $SSH_AUTH_SOCK broken so start a new agent
+    if [ $? -eq 2 ]; then
+      start_agent
+    fi
+  fi
+}
+
+# try adding - maybe we have access to an agent w/o checking $SSH_AGENT_PID
+test_identities
+
+# check for running ssh-agent with proper $SSH_AGENT_PID
+if [ -n "$SSH_AGENT_PID" ]; then
+  ps -f -u $USER | grep "$SSH_AGENT_PID" | grep ssh-agent > /dev/null
+  if [ $? -eq 0 ]; then
+    test_identities
+  fi
+else
+  # if $SSH_AGENT_PID is not properly set, we might be able to load one from $SSH_ENV
+  if [ -f "$SSH_ENV" ]; then
+    . "$SSH_ENV" > /dev/null
+  fi
+  if [ -n "$SSH_AGENT_PID" ]; then
+    ps -f -u $USER | grep "$SSH_AGENT_PID" | grep ssh-agent > /dev/null
+    if [ $? -eq 0 ]; then
+      test_identities
+    else
+      start_agent
+    fi
+  fi
+fi
+

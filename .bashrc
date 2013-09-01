@@ -6,9 +6,6 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # User specific aliases and functions
-if [ -f ~/.bashrc_tim ]; then
-    . ~/.bashrc_tim
-fi
-if [ -f ~/.bash_alias ]; then
-    . ~/.bash_alias
+if [ -f ~/.bashrc_${USER} ]; then
+    . ~/.bashrc_${USER}
 fi

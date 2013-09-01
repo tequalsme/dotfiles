@@ -1,3 +1,41 @@
+" Tim Reardon: copied from /usr/share/vim/vim71/vimrc_example.vim and modified as follows:
+"
+" 1. commented backup block
+" 2. commented mouse
+" 3. added following:
+
+" Tabs to 4 spaces
+set shiftwidth=4
+set tabstop=4
+
+set expandtab
+set smarttab
+set shiftround
+
+" indentation
+set autoindent
+set smartindent
+
+" searching
+set ignorecase
+set smartcase
+set showmatch
+
+" disable both visual error flash and error beep
+set visualbell
+set t_vb=
+
+" always show statusline
+set laststatus=2
+
+" custom statusline: path arglist flags        line col %displayed
+set statusline=%<%f\ %a%h%m%r%=%-14.(%l,%c%V%)\ %P
+
+" F2 to toggle paste mode
+set pastetoggle=<F2>
+
+" """""""""""""""""""""""""""""""""""""""""
+
 " An example for a vimrc file.
 "
 " Maintainer:	Bram Moolenaar <Bram@vim.org>
@@ -89,32 +127,3 @@ set autoindent
 set shiftwidth=4
 filetype indent on
 
-" Tim's mods:
-" 1. commented backup block
-" 2. commented mouse
-" 3. added following:
-
-" Tabs to spaces:
-set shiftwidth=4
-set tabstop=4
-
-set expandtab
-set smarttab
-set shiftround
-
-" indentation
-set autoindent
-set smartindent
-
-" searching
-set ignorecase
-set smartcase
-set showmatch
-
-" always show statusline
-set laststatus=2
-" statusline: path arglist flags line col %displayed
-set statusline=%<%f\ %a%h%m%r%=%-14.(%l,%c%V%)\ %P
-
-" F2 to toggle paste mode
-set pastetoggle=<F2>

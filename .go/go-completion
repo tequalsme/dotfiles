@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# --- Bash completion cheatsheet ---
+# (because I never remember this stuff; also see man compgen')
+#
+# COMP_CWORD : index of the command argument containing the current curson position
+# COMP_WORDS : array containing individual command arguments typed so far
+# COMPREPLY  : array containing possible completions as a result of your function
+#
+# compgen -W options -- word
+#   supply a list of words and a partial word, and it will show all words that match it
+#
+# complete -F function name
+
+
+# host name tab completion, callers should check COMP_CWORD state before calling.
+_host_name_complete() {
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+    local values=$(host list | grep -v "^#" | cut -d '=' -f1 )
+    COMPREPLY=( $(compgen -W "${values}" -- ${cur}) )
+}
+
+# 'host' command completion
+_host_complete() {
+    local opts="get list file"
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+
+    for cmd in ${opts}; do
+        if [[ ${COMP_WORDS[1]} == ${cmd} ]]; then
+            # set up a default COMPREPLY
+            COMPREPLY=()
+
+            case ${cmd} in
+                get) [[ ${COMP_CWORD} == 2 ]] && _host_name_complete ;;
+            esac
+
+            return
+        fi
+    done
+
+    # if not found simply provide the list of opts as the COMPREPLY
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+    return
+}
+complete -F _host_complete host
+
+# 'go' command completion
+_go_complete() {
+    [[ ${COMP_CWORD} == 1 ]] && _host_name_complete
+}
+complete -F _go_complete go
