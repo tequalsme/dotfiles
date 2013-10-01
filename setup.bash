@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Setup a new directory with files from this repository,
 # backing up/overwriting/skipping existing files as specified by user input.
