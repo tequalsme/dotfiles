@@ -3,11 +3,11 @@
 # --------------------------
 
 # Homes
-[[ -d /usr/java/latest ]] && JAVA_HOME=/usr/java/latest
-[[ -d /opt/maven/current ]] && M2_HOME=/opt/maven/current
-[[ -d /opt/zookeeper/current ]] && ZOOKEEPER_HOME=/opt/zookeeper/current
-[[ -d /opt/hadoop/current ]] && HADOOP_HOME=/opt/hadoop/current
-[[ -d /opt/accumulo/current ]] && ACCUMULO_HOME=/opt/accumulo/current
+[[ -d /usr/java/latest ]] && export JAVA_HOME=/usr/java/latest
+[[ -d /opt/maven/current ]] && export M2_HOME=/opt/maven/current
+[[ -d /opt/zookeeper/current ]] && export ZOOKEEPER_HOME=/opt/zookeeper/current
+[[ -d /opt/hadoop/current ]] && export HADOOP_HOME=/opt/hadoop/current
+[[ -d /opt/accumulo/current ]] && export ACCUMULO_HOME=/opt/accumulo/current
 
 # Opts
 export JAVA_OPTS="-Xms512m -Xmx1024m -XX:MaxPermSize=512m"
@@ -28,10 +28,14 @@ if type -t __git_ps1 > /dev/null 2>&1; then
     GIT_PS1_SHOWSTASHSTATE=1
     GIT_PS1_SHOWUNTRACKEDFILES=1
     # color prompt with Git status (\w for full working dir, \W for basename)
-    PS1='\[\e[0m\]\u@\h:\[\e[34m\]\W\[\e[0m\]$(__git_ps1 "(%s)")\$ '
+    #PS1='\[\e[0m\]\u@\h:\[\e[34m\]\W\[\e[0m\]$(__git_ps1 "(%s)")\$ '
+    # same prompt as above, without hostname
+    PS1='\[\e[0m\]\u:\[\e[34m\]\W\[\e[0m\]$(__git_ps1 "(%s)")\$ '
 else
     # color prompt without Git status
-    PS1='\[\e[0m\]\u@\h:\[\e[34m\]\W\[\e[0m\]\$ '
+    #PS1='\[\e[0m\]\u@\h:\[\e[34m\]\W\[\e[0m\]\$ '
+    # same prompt as above, without hostname
+    PS1='\[\e[0m\]\u:\[\e[34m\]\W\[\e[0m\]\$ '
 fi
 
 # Paths
@@ -156,4 +160,7 @@ findsrc() {
 
 if [ -f ~/.ssh-agent-init ]; then
     . ~/.ssh-agent-init
+fi
+if [ -f ~/.go/env ]; then
+    . ~/.go/env
 fi

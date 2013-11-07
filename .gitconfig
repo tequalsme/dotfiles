@@ -6,7 +6,7 @@
         editor = vi
         autocrlf = input
         safecrlf = true
-        excludesfile = /path/to/.gitignore
+        excludesfile = ~/.gitignore
         # must first reset $LESS options, then specify options for git pager
         pager = less -+$LESS -FRXqi
 [color]

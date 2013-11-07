@@ -4,3 +4,7 @@ target/
 .settings/
 .pmd
 .springBeans
+.idea/
+*.iml
+*.iws
+*.ipr
