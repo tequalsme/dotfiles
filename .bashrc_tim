@@ -131,7 +131,7 @@ alias x=exit
 alias mvnfull='mvn clean install'
 alias mvnquick='mvn clean install -DskipTests=true'
 
-alias pomgrep='find . -name pom.xml -print0 | xargs -0 grep "$@"'
+alias pomgrep='find . -path "*/target" -prune -o -name pom.xml -print0 | xargs -0 grep "$@"'
 
 # --------------------------
 # Functions
