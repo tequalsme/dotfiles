@@ -22,6 +22,7 @@
         co = checkout
         di = diff
         st = status
+        f = fetch --all --tags --prune
         undo = reset --soft HEAD^
         l = log --pretty='%h %ad %an %s' --date=local
         lg = log -p
@@ -34,6 +35,8 @@
         sup = !git-svn fetch && git-svn rebase
         spush = !git-svn dcommit
         upsub = !git submodule update --init
+        lb = !git l ..`git rev-parse --abbrev-ref @{u}`
+        la = !git l `git rev-parse --abbrev-ref @{u}`..
 [push]
         default = tracking
 [pull]

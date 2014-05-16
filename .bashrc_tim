@@ -6,7 +6,10 @@
 [[ -d /usr/java/latest ]] && export JAVA_HOME=/usr/java/latest
 [[ -d /opt/maven/current ]] && export M2_HOME=/opt/maven/current
 [[ -d /opt/zookeeper/current ]] && export ZOOKEEPER_HOME=/opt/zookeeper/current
+[[ -d /usr/lib/zookeeper ]] && export ZOOKEEPER_HOME=/usr/lib/zookeeper
 [[ -d /opt/hadoop/current ]] && export HADOOP_HOME=/opt/hadoop/current
+[[ -d /usr/lib/hadoop ]] && export HADOOP_PREFIX=/usr/lib/hadoop && unset HADOOP_HOME
+[[ -d /usr/lib/hadoop/lib/native ]] && export LD_LIBRARY_PATH=/usr/lib/hadoop/lib/native
 [[ -d /opt/accumulo/current ]] && export ACCUMULO_HOME=/opt/accumulo/current
 
 # Opts
@@ -110,6 +113,7 @@ shopt -s cdspell
 # --------------------------
 alias cp="cp -p"
 alias d="dirs"
+alias dv="dirs -v"
 alias ff="find . -name"
 alias grep="grep --color=auto"
 alias g=grep
@@ -151,7 +155,7 @@ findsrc() {
     find . -path ./.git -prune -o \
            -path "*/.svn" -prune -o \
            -path "*/target" -prune -o \
-           "${@}"
+           ${@}
 }
 
 # --------------------------
