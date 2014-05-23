@@ -146,13 +146,13 @@ alias pomgrep='find . -path "*/target" -prune -o -name pom.xml -print0 | xargs -
 #   */.svn
 #   */target
 rgrep() {
-    find . -path ./.git -prune -o \
+    find . -path "*/.git" -prune -o \
            -path "*/.svn" -prune -o \
            -path "*/target" -prune -o \
            -type f -print0 2> /dev/null | xargs -0 grep "${@}"
 }
 findsrc() {
-    find . -path ./.git -prune -o \
+    find . -path "*/.git" -prune -o \
            -path "*/.svn" -prune -o \
            -path "*/target" -prune -o \
            ${@}

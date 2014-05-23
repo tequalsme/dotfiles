@@ -4,7 +4,7 @@
 #   ./.git
 #   */.svn
 #   */target
-find . -path ./.git -prune -o \
+find . -path "*/.git" -prune -o \
        -path "*/.svn" -prune -o \
        -path "*/target" -prune -o \
        -type f -print0 2> /dev/null | xargs -0 grep "${@}"
