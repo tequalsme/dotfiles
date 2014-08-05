@@ -2,7 +2,7 @@
 
 $include /etc/inputrc
 
-set editing-mode vi
+#set editing-mode vi
 set enable-keypad on
 #set expand-tilde on
 

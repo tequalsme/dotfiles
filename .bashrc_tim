@@ -4,6 +4,7 @@
 
 # Homes
 [[ -d /usr/java/latest ]] && export JAVA_HOME=/usr/java/latest
+[[ `uname` = "Darwin" ]] && export JAVA_HOME=$(/usr/libexec/java_home)
 [[ -d /opt/maven/current ]] && export M2_HOME=/opt/maven/current
 [[ -d /opt/zookeeper/current ]] && export ZOOKEEPER_HOME=/opt/zookeeper/current
 [[ -d /usr/lib/zookeeper ]] && export ZOOKEEPER_HOME=/usr/lib/zookeeper
@@ -21,11 +22,11 @@ export MAVEN_OPTS="-Xms512m -Xmx1024m -XX:MaxPermSize=512m"
 [[ -r "$RVM_HOME/scripts/completion" ]] && source "$RVM_HOME/scripts/completion"
 [[ -s "$RVM_HOME/scripts/rvm" ]] && source "$RVM_HOME/scripts/rvm"
 
-# Git
-# 1.8 - git-prompt.sh
-# 1.7 - git-completion.sh
+# Git - various places
 [[ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]] && source /usr/share/git-core/contrib/completion/git-prompt.sh
-#[[ -f /path/to/git-completion.sh ]] && source /path/to/git-completion.sh
+[[ -f /usr/local/git/contrib/completion/git-completion.bash ]] && source /usr/local/git/contrib/completion/git-completion.bash
+[[ -f /usr/local/git/contrib/completion/git-prompt.sh ]] && source /usr/local/git/contrib/completion/git-prompt.sh
+
 if type -t __git_ps1 > /dev/null 2>&1; then
     GIT_PS1_SHOWDIRTYSTATE=1
     GIT_PS1_SHOWSTASHSTATE=1
@@ -118,7 +119,8 @@ alias ff="find . -name"
 alias grep="grep --color=auto"
 alias g=grep
 alias h=history
-alias ls="ls -G --color=auto --show-control-chars"
+#alias ls="ls -G --color=auto --show-control-chars"
+alias ls="ls -G"
 alias l="ls -l"
 alias la="l -A"
 alias lt="l -t"
