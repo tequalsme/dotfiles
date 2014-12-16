@@ -17,17 +17,17 @@ bundle=$1
 echo "Verifying bundle..."
 git bundle verify "${bundle}"
 
-read -e -p "Dry run only? (y/n) " -i "n" dryRun
+read -e -p "Dry run only? (y/n) " dryRun
 [[ -n "$dryRun" ]]
 
-read -e -p "Does bundle represent a branch or tag? " -i "tag" refType
-[[ "$refType" == "branch || "$refType" == "tag" ]]
+read -e -p "Does bundle represent a branch or tag? " refType
+[[ "$refType" == "branch" || "$refType" == "tag" ]]
 
-read -e -p "Branch/tag to unbundle? (e.g. dev/2.1, release/1.2) " -i "master" bundleRefName
+read -e -p "Branch/tag to unbundle? (e.g. master, dev/1.x) " bundleRefName
 [[ -n "$bundleRefName" ]]
 
 if [ "$refType" == "branch" ]; then
-    read -e -p "Repository name where bundle was created? " -i "origin" bundleRepository
+    read -e -p "Repository name where bundle was created (e.g. origin)? " bundleRepository
     [[ -n "$bundleRepository" ]]
     bundleRef="remotes/${bundleRepository}/${bundleRefName}"
 else
