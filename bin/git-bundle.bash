@@ -12,7 +12,7 @@ read -e -p "Read-only (i.e. do not tag)? (y/n) " -i "n" noTag
 [[ -n "$noTag" ]]
 
 read -e -p "Will bundle represent a branch or tag? " -i "tag" refType
-[[ "$refType" == "branch || "$refType" == "tag" ]]
+[[ "$refType" == "branch" || "$refType" == "tag" ]]
 
 read -e -p "Repository name? " -i "origin" repository
 [[ -n "$repository" ]]
@@ -54,7 +54,7 @@ echo "safeRefName: $safeRefName"
 echo "refList: $refList"
 echo ""
 
-execCOmmand() {
+execCommand() {
     if [ "$dryRun" != "y" ]; then
         echo "Executing '$1'"
         $1

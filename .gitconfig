@@ -23,6 +23,7 @@
         di = diff
         st = status
         f = fetch --all --tags --prune
+        g = gc --auto
         undo = reset --soft HEAD^
         l = log --pretty='%h %ad %an %s' --date=local
         lg = log -p
