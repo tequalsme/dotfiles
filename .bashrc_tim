@@ -12,6 +12,7 @@
 [[ -d /usr/lib/hadoop ]] && export HADOOP_PREFIX=/usr/lib/hadoop && unset HADOOP_HOME
 [[ -d /usr/lib/hadoop/lib/native ]] && export LD_LIBRARY_PATH=/usr/lib/hadoop/lib/native
 [[ -d /opt/accumulo/current ]] && export ACCUMULO_HOME=/opt/accumulo/current
+[[ -d /opt/mongodb/current ]] && export MONGODB_HOME=/opt/mongodb/current
 
 # Opts
 export JAVA_OPTS="-Xms512m -Xmx1024m -XX:MaxPermSize=512m"
@@ -61,6 +62,7 @@ pathmunge() {
 [[ -d "$JAVA_HOME" ]] && pathmunge $JAVA_HOME/bin
 [[ -d "$HOME/bin" ]]  && pathmunge $HOME/bin
 
+[[ -d "$MONGODB_HOME" ]]  && pathmunge $MONGODB_HOME/bin after
 [[ -d "$ACCUMULO_HOME" ]]  && pathmunge $ACCUMULO_HOME/bin after
 [[ -d "$HADOOP_HOME" ]]    && pathmunge $HADOOP_HOME/bin after
 [[ -d "$ZOOKEEPER_HOME" ]] && pathmunge $ZOOKEEPER_HOME/bin after
