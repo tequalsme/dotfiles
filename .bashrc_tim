@@ -15,8 +15,8 @@
 [[ -d /opt/mongodb/current ]] && export MONGODB_HOME=/opt/mongodb/current
 
 # Opts
-export JAVA_OPTS="-Xms512m -Xmx1024m -XX:MaxPermSize=512m"
-export MAVEN_OPTS="-Xms512m -Xmx1024m -XX:MaxPermSize=512m"
+export JAVA_OPTS="-Xms512m -Xmx2048m"
+export MAVEN_OPTS="-Xms512m -Xmx2048m"
 
 # RVM
 [[ -d $HOME/.rvm ]] && RVM_HOME=$HOME/.rvm
@@ -182,13 +182,26 @@ start-accumulo() {
 stop-accumulo() {
     sudo -u hdfs $ACCUMULO_HOME/bin/stop-all.sh
 }
-# Hadoop 2.x
+# Hadoop 2.x (MR1)
 start-hadoop() {
     for x in `cd /etc/init.d ; ls hadoop-hdfs-*` ; do sudo service $x start ; done
     for x in `cd /etc/init.d ; ls hadoop-0.20-mapreduce-*` ; do sudo service $x start ; done
 }
 stop-hadoop() {
     for x in `cd /etc/init.d ; ls hadoop-0.20-mapreduce-*` ; do sudo service $x stop ; done
+    for x in `cd /etc/init.d ; ls hadoop-hdfs-*` ; do sudo service $x stop ; done
+}
+# Hadoop 2.x (YARN)
+start-hadoop2() {
+    for x in `cd /etc/init.d ; ls hadoop-hdfs-*` ; do sudo service $x start ; done
+    sudo service hadoop-yarn-resourcemanager start 
+    sudo service hadoop-yarn-nodemanager start 
+    sudo service hadoop-mapreduce-historyserver start
+}
+stop-hadoop2() {
+    sudo service hadoop-mapreduce-historyserver stop
+    sudo service hadoop-yarn-nodemanager stop 
+    sudo service hadoop-yarn-resourcemanager stop 
     for x in `cd /etc/init.d ; ls hadoop-hdfs-*` ; do sudo service $x stop ; done
 }
 start-zk() {

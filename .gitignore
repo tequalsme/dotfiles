@@ -5,3 +5,4 @@ target/
 .pmd
 .springBeans
 *.iml
+.pydevproject
