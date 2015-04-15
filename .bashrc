@@ -29,7 +29,8 @@ export MAVEN_OPTS="-Xms512m -Xmx2048m"
 [[ -s "$RVM_HOME/scripts/rvm" ]] && source "$RVM_HOME/scripts/rvm"
 
 # Git - Fedora/CentOS
-[[ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]] && source /usr/share/git-core/contrib/completion/git-prompt.sh
+[[ -f ~/.git-prompt.sh ]] && source ~/.git-prompt.sh
+[[ -f ~/.git-completion.sh ]] && source ~/.git-completion.sh
 
 if type -t __git_ps1 > /dev/null 2>&1; then
     GIT_PS1_SHOWDIRTYSTATE=1
