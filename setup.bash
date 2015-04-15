@@ -82,7 +82,6 @@ skip_all=false
 
 check_install $SRC_DIR/.bash_profile $DEST_DIR/.bash_profile
 check_install $SRC_DIR/.bashrc       $DEST_DIR/.bashrc
-check_install $SRC_DIR/.bashrc_$USER $DEST_DIR/.bashrc_$USER
 check_install $SRC_DIR/bin           $DEST_DIR/bin
 check_install $SRC_DIR/.gitconfig    $DEST_DIR/.gitconfig
 check_install $SRC_DIR/.gitignore    $DEST_DIR/.gitignore
