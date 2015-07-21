@@ -39,9 +39,7 @@
         lb = !git l ..`git rev-parse --abbrev-ref @{u}`
         la = !git l `git rev-parse --abbrev-ref @{u}`..
 [push]
-        default = tracking
-[pull]
-        default = tracking
+        default = simple
 [diff]
         mnemonicprefix = 1
         renamed = copy
