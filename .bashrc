@@ -7,6 +7,31 @@ fi
 # Env
 # --------------------------
 
+case "`uname`" in
+    # OS X
+    Darwin)
+        if type -t brew > /dev/null 2>&1; then
+            if [ -f `brew --prefix`/etc/bash_completion ]; then
+                . `brew --prefix`/etc/bash_completion
+            fi
+        fi
+
+        # brew coreutils - put gnuutils before OSX variants
+        if [ -d /usr/local/opt/coreutils/libexec/gnubin ]; then
+            export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+            if [ -d /usr/local/opt/coreutils/libexec/gnuman ]; then
+                export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
+            fi
+        fi
+        ;;
+
+    # Cygwin
+    CYGWIN*)
+        echo "CYGWIN!"
+        export CYGWIN=nodosfilewarning
+        ;;
+esac
+
 # Homes
 [[ -d /usr/java/latest ]] && export JAVA_HOME=/usr/java/latest
 [[ `uname` = "Darwin" ]] && export JAVA_HOME=$(/usr/libexec/java_home)
@@ -20,8 +45,8 @@ fi
 [[ -d /opt/mongodb/current ]] && export MONGODB_HOME=/opt/mongodb/current
 
 # Opts
-export JAVA_OPTS="-Xms512m -Xmx2048m"
-export MAVEN_OPTS="-Xms512m -Xmx2048m"
+export JAVA_OPTS="-Xms1024m -Xmx3076m"
+export MAVEN_OPTS="-Xms1024m -Xmx3076m"
 
 # RVM
 [[ -d $HOME/.rvm ]] && RVM_HOME=$HOME/.rvm
@@ -70,31 +95,6 @@ pathmunge() {
 [[ -d "$ACCUMULO_HOME" ]]  && pathmunge $ACCUMULO_HOME/bin after
 [[ -d "$HADOOP_HOME" ]]    && pathmunge $HADOOP_HOME/bin after
 [[ -d "$ZOOKEEPER_HOME" ]] && pathmunge $ZOOKEEPER_HOME/bin after
-
-case "`uname`" in
-    # OS X
-    Darwin)
-        if type -t brew > /dev/null 2>&1; then
-            if [ -f `brew --prefix`/etc/bash_completion ]; then
-                . `brew --prefix`/etc/bash_completion
-            fi
-        fi
-
-        # brew coreutils - put gnuutils before OSX variants
-        if [ -d /usr/local/opt/coreutils/libexec/gnubin ]; then
-            export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
-            if [ -d /usr/local/opt/coreutils/libexec/gnuman ]; then
-                export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
-            fi
-        fi
-        ;;
-
-    # Cygwin
-    CYGWIN*)
-        echo "CYGWIN!"
-        export CYGWIN=nodosfilewarning
-        ;;
-esac
 
 # Misc
 export EDITOR=vim

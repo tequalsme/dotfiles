@@ -6,3 +6,4 @@ target/
 .springBeans
 *.iml
 .pydevproject
+.DS_Store
