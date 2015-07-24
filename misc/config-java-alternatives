@@ -1,12 +1,54 @@
-sudo alternatives --install /usr/bin/java java /usr/java/default/bin/java 2 \
---slave /usr/bin/javac javac /usr/java/default/bin/javac \
---slave /usr/bin/javadoc javadoc /usr/java/default/bin/javadoc \
---slave /usr/bin/jar jar /usr/java/default/bin/jar \
---slave /usr/bin/keytool keytool /usr/java/default/bin/keytool \
---slave /usr/bin/orbd orbd /usr/java/default/bin/orbd \
---slave /usr/bin/pack200 pack200 /usr/java/default/bin/pack200 \
---slave /usr/bin/rmid rmid /usr/java/default/bin/rmid \
---slave /usr/bin/rmiregistry rmiregistry /usr/java/default/bin/rmiregistry \
---slave /usr/bin/servertool servertool /usr/java/default/bin/servertool \
---slave /usr/bin/tnameserv tnameserv /usr/java/default/bin/tnameserv \
---slave /usr/bin/unpack200 unpack200 /usr/java/default/bin/unpack200
+#!/bin/bash
+
+JAVA_HOME=/usr/java/default
+PRIORITY=20000
+
+MAN_PATH=/usr/share/man/man1
+JAVA_MAN_PATH=$JAVA_HOME/man/man1
+
+sudo alternatives --install /usr/bin/java java $JAVA_HOME/bin/java $PRIORITY \
+--slave /usr/bin/javac             javac            $JAVA_HOME/bin/javac \
+--slave /usr/bin/javaws            javaws           $JAVA_HOME/bin/javaws \
+--slave /usr/bin/javadoc           javadoc          $JAVA_HOME/bin/javadoc \
+--slave /usr/bin/jar               jar              $JAVA_HOME/bin/jar \
+--slave /usr/bin/keytool           keytool          $JAVA_HOME/bin/keytool \
+--slave /usr/bin/appletviewer      appletviewer     $JAVA_HOME/bin/appletviewer \
+--slave /usr/bin/javap             javap            $JAVA_HOME/bin/javap \
+--slave /usr/bin/jdb               jdb              $JAVA_HOME/bin/jdb \
+--slave /usr/bin/jstat             jstat            $JAVA_HOME/bin/jstat \
+--slave /usr/bin/rmic              rmic             $JAVA_HOME/bin/rmic \
+--slave /usr/bin/idlj              idlj             $JAVA_HOME/bin/idlj \
+--slave /usr/bin/javah             javah            $JAVA_HOME/bin/javah \
+--slave /usr/bin/jstack            jstack           $JAVA_HOME/bin/jstack \
+--slave /usr/bin/orbd              orbd             $JAVA_HOME/bin/orbd \
+--slave /usr/bin/pack200           pack200          $JAVA_HOME/bin/pack200 \
+--slave /usr/bin/rmid              rmid             $JAVA_HOME/bin/rmid \
+--slave /usr/bin/rmiregistry       rmiregistry      $JAVA_HOME/bin/rmiregistry \
+--slave /usr/bin/servertool        servertool       $JAVA_HOME/bin/servertool \
+--slave /usr/bin/tnameserv         tnameserv        $JAVA_HOME/bin/tnameserv \
+--slave /usr/bin/unpack200         unpack200        $JAVA_HOME/bin/unpack200 \
+--slave /usr/bin/jps               jps              $JAVA_HOME/bin/jps \
+--slave /usr/bin/apt               apt              $JAVA_HOME/bin/apt \
+--slave $MAN_PATH/java.1           java.1           $JAVA_MAN_PATH/java.1 \
+--slave $MAN_PATH/javac.1          javac.1          $JAVA_MAN_PATH/javac.1 \
+--slave $MAN_PATH/javaws.1         javaws.1         $JAVA_MAN_PATH/javaws.1 \
+--slave $MAN_PATH/javadoc.1        javadoc.1        $JAVA_MAN_PATH/javadoc.1 \
+--slave $MAN_PATH/jar.1            jar.1            $JAVA_MAN_PATH/jar.1 \
+--slave $MAN_PATH/keytool.1        keytool.1        $JAVA_MAN_PATH/keytool.1 \
+--slave $MAN_PATH/appletviewer.1   appletviewer.1   $JAVA_MAN_PATH/appletviewer.1 \
+--slave $MAN_PATH/javap.1          javap.1          $JAVA_MAN_PATH/javap.1 \
+--slave $MAN_PATH/jdb.1            jdb.1            $JAVA_MAN_PATH/jdb.1 \
+--slave $MAN_PATH/jstat.1          jstat.1          $JAVA_MAN_PATH/jstat.1 \
+--slave $MAN_PATH/rmic.1           rmic.1           $JAVA_MAN_PATH/rmic.1 \
+--slave $MAN_PATH/idlj.1           idlj.1           $JAVA_MAN_PATH/idlj.1 \
+--slave $MAN_PATH/javah.1          javah.1          $JAVA_MAN_PATH/javah.1 \
+--slave $MAN_PATH/jstack.1         jstack.1         $JAVA_MAN_PATH/jstack.1 \
+--slave $MAN_PATH/orbd.1           orbd.1           $JAVA_MAN_PATH/orbd.1 \
+--slave $MAN_PATH/pack200.1        pack200.1        $JAVA_MAN_PATH/pack200.1 \
+--slave $MAN_PATH/rmid.1           rmid.1           $JAVA_MAN_PATH/rmid.1 \
+--slave $MAN_PATH/rmiregistry.1    rmiregistry.1    $JAVA_MAN_PATH/rmiregistry.1 \
+--slave $MAN_PATH/servertool.1     servertool.1     $JAVA_MAN_PATH/servertool.1 \
+--slave $MAN_PATH/tnameserv.1      tnameserv.1      $JAVA_MAN_PATH/tnameserv.1 \
+--slave $MAN_PATH/unpack200.1      unpack200.1      $JAVA_MAN_PATH/unpack200.1 \
+--slave $MAN_PATH/jps.1            jps.1            $JAVA_MAN_PATH/jps.1 \
+--slave $MAN_PATH/apt.1            apt.1            $JAVA_MAN_PATH/apt.1
