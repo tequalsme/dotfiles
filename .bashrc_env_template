@@ -1,0 +1,7 @@
+# Opts
+export JAVA_OPTS="-Xms512m -Xmx2048m"
+export MAVEN_OPTS="-Xms512m -Xmx2048m"
+
+# Prompt without user@hostname, only current dir
+PS1='\[\e[32m\]\w$(__git_ps1 "(%s)")\[\e[0m\] \$ '
+

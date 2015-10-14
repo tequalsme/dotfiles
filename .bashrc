@@ -53,7 +53,10 @@ export MAVEN_OPTS="-Xms1024m -Xmx3076m"
 [[ -r "$RVM_HOME/scripts/completion" ]] && source "$RVM_HOME/scripts/completion"
 [[ -s "$RVM_HOME/scripts/rvm" ]] && source "$RVM_HOME/scripts/rvm"
 
-# Git - Fedora/CentOS
+# Git - OS X brew
+[[ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]] && source /usr/local/etc/bash_completion.d/git-prompt.sh
+[[ -f /usr/local/etc/bash_completion.d/git-completion.bash ]] && source /usr/local/etc/bash_completion.d/git-completion.bash
+# Git - manual fallback (Fedora/CentOS?)
 [[ -f ~/.git-prompt.sh ]] && source ~/.git-prompt.sh
 [[ -f ~/.git-completion.sh ]] && source ~/.git-completion.sh
 
@@ -154,7 +157,7 @@ alias pd="popd"
 alias scp="scp -p"
 alias scratch="cat > /dev/null"
 alias ssh="ssh -AX"
-alias tf="tail -f"
+alias tf="tail -n 100 -f"
 alias x=exit
 
 alias mvnfull='mvn clean install'
@@ -226,4 +229,9 @@ if [ -f ~/.ssh-agent-init ]; then
 fi
 if [ -f ~/.go/env ]; then
     . ~/.go/env
+fi
+
+# env-specific customizations
+if [ -f ~/.bashrc_env ]; then
+    . ~/.bashrc_env
 fi
