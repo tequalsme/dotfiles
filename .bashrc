@@ -32,17 +32,46 @@ case "`uname`" in
         ;;
 esac
 
-# Homes
+# --------------------------
+# Common Apps - set *_HOME envvars and add to PATH
+# --------------------------
 [[ -d /usr/java/latest ]] && export JAVA_HOME=/usr/java/latest
 [[ `uname` = "Darwin" ]] && export JAVA_HOME=$(/usr/libexec/java_home)
 [[ -d /opt/maven/current ]] && export M2_HOME=/opt/maven/current
 [[ -d /opt/zookeeper/current ]] && export ZOOKEEPER_HOME=/opt/zookeeper/current
 [[ -d /usr/lib/zookeeper ]] && export ZOOKEEPER_HOME=/usr/lib/zookeeper
+[[ -d /opt/storm/current ]] && export STORM_HOME=/opt/storm/current
 [[ -d /opt/hadoop/current ]] && export HADOOP_HOME=/opt/hadoop/current
 [[ -d /usr/lib/hadoop ]] && export HADOOP_PREFIX=/usr/lib/hadoop && unset HADOOP_HOME
 [[ -d /usr/lib/hadoop/lib/native ]] && export LD_LIBRARY_PATH=/usr/lib/hadoop/lib/native
 [[ -d /opt/accumulo/current ]] && export ACCUMULO_HOME=/opt/accumulo/current
 [[ -d /opt/mongodb/current ]] && export MONGODB_HOME=/opt/mongodb/current
+
+# pathmunge copied from Centos /etc/profile
+pathmunge() {
+    case ":${PATH}:" in
+        *:"$1":*)
+            ;;
+        *)
+            if [ "$2" = "after" ] ; then
+                PATH=$PATH:$1
+            else
+                PATH=$1:$PATH
+            fi
+    esac
+}
+
+[[ -d "$M2_HOME" ]]   && pathmunge $M2_HOME/bin
+[[ -d "$JAVA_HOME" ]] && pathmunge $JAVA_HOME/bin
+[[ -d "$HOME/bin" ]]  && pathmunge $HOME/bin
+
+[[ -d "$MONGODB_HOME" ]]   && pathmunge $MONGODB_HOME/bin after
+[[ -d "$ACCUMULO_HOME" ]]  && pathmunge $ACCUMULO_HOME/bin after
+[[ -d "$STORM_HOME" ]]     && pathmunge $STORM_HOME/bin after
+[[ -d "$HADOOP_HOME" ]]    && pathmunge $HADOOP_HOME/bin after
+[[ -d "$ZOOKEEPER_HOME" ]] && pathmunge $ZOOKEEPER_HOME/bin after
+
+unset -f pathmunge
 
 # Opts
 export JAVA_OPTS="-Xms1024m -Xmx3076m"
@@ -74,30 +103,6 @@ else
     # same prompt as above, without hostname
     #PS1='\[\e[0m\]\u:\[\e[34m\]\W\[\e[0m\]\$ '
 fi
-
-# Paths
-# pathmunge copied from /etc/profile
-pathmunge() {
-    case ":${PATH}:" in
-        *:"$1":*)
-            ;;
-        *)
-            if [ "$2" = "after" ] ; then
-                PATH=$PATH:$1
-            else
-                PATH=$1:$PATH
-            fi
-    esac
-}
-
-[[ -d "$M2_HOME" ]]   && pathmunge $M2_HOME/bin
-[[ -d "$JAVA_HOME" ]] && pathmunge $JAVA_HOME/bin
-[[ -d "$HOME/bin" ]]  && pathmunge $HOME/bin
-
-[[ -d "$MONGODB_HOME" ]]  && pathmunge $MONGODB_HOME/bin after
-[[ -d "$ACCUMULO_HOME" ]]  && pathmunge $ACCUMULO_HOME/bin after
-[[ -d "$HADOOP_HOME" ]]    && pathmunge $HADOOP_HOME/bin after
-[[ -d "$ZOOKEEPER_HOME" ]] && pathmunge $ZOOKEEPER_HOME/bin after
 
 # Misc
 export EDITOR=vim
@@ -162,29 +167,33 @@ alias x=exit
 
 alias mvnfull='mvn clean install'
 alias mvnquick='mvn clean install -DskipTests=true'
-
-alias pomgrep='find . -path "*/target" -prune -o -name pom.xml -print0 | xargs -0 grep "$@"'
+alias mvnfullt='mvnfull -T 2.0C'
+alias mvnquickt='mvnquick -T 2.0C'
 
 # --------------------------
 # Functions
 # --------------------------
 
-# recursive grep, skipping the following directories:
-#   ./.git
-#   */.svn
-#   */target
+# the following find functions skip all .git/.svn/target dirs
+
+# recursive grep
 rgrep() {
-    find . -path "*/.git" -prune -o \
-           -path "*/.svn" -prune -o \
-           -path "*/target" -prune -o \
-           -type f -print0 2> /dev/null | xargs -0 grep "${@}"
+    find . \( -path "*/.git" -o -path "*/.svn" -o -path "*/target" \) -prune -o \
+        -type f -print0 2> /dev/null | \
+        xargs -0 grep "${@}"
 }
+# recursive grep of pom.xml files
+pomgrep() {
+    find . \( -path "*/.git" -o -path "*/.svn" -o -path "*/target" \) -prune -o \
+        -type f -name pom.xml -print0 | \
+        xargs -0 grep "${@}"
+}
+# open-ended find command, must tack on additional expression(s) and end with -print or -print0
 findsrc() {
-    find . -path "*/.git" -prune -o \
-           -path "*/.svn" -prune -o \
-           -path "*/target" -prune -o \
-           ${@}
+    find . \( -path "*/.git" -o -path "*/.svn" -o -path "*/target" \) -prune -o \
+        ${@}
 }
+
 start-accumulo() {
     sudo -u hdfs $ACCUMULO_HOME/bin/start-all.sh
 }

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# moved to a .bashrc function
+
 # skip the following directories:
 #   ./.git
 #   */.svn
