@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# NOTE: it is easier to do the following:
+# git init reponame
+# cd reponame
+# git bundle verify ../reponame.bundle
+# git fetch ../reponame.bundle refs/heads/master
+# git checkout -b master FETCH_HEAD
+
 # Helper script for 'git bundle'.
 # Unbundles the file created by git-bundle.bash.
 

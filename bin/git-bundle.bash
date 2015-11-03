@@ -5,25 +5,25 @@
 
 set -e
 
-read -e -p "Dry run only? (y/n) " -i "n" dryRun
+read -e -p "Dry run only? (y/n) " dryRun
 [[ -n "$dryRun" ]]
 
-read -e -p "Read-only (i.e. do not tag)? (y/n) " -i "n" noTag
+read -e -p "Read-only (i.e. do not tag)? (y/n) " noTag
 [[ -n "$noTag" ]]
 
-read -e -p "Will bundle represent a branch or tag? " -i "tag" refType
+read -e -p "Will bundle represent a branch or tag? " refType
 [[ "$refType" == "branch" || "$refType" == "tag" ]]
 
-read -e -p "Repository name? " -i "origin" repository
+read -e -p "Repository name? " repository
 [[ -n "$repository" ]]
 
-read -e -p "Branch/tag to bundle? (e.g. dev/2.1, release/1.2) " -i "master" refToBundle
+read -e -p "Branch/tag to bundle? (e.g. dev/2.1, release/1.2) " refToBundle
 [[ -n "$refToBundle" ]]
 
-read -e -p "Tag base to use? " -i "bundled/destination" tagBase
+read -e -p "Tag base to use? " tagBase
 [[ -n "$tagBase" ]]
 
-read -e -p "Hash to start from? ('-' for previous bundle of this branch/tag, empty for all commits) " -i "-" startingPointName
+read -e -p "Hash to start from? ('-' for previous bundle of this branch/tag, empty for all commits) " startingPointName
 
 tagName="${tagBase}/${refToBundle}"
 [[ "$refType" == "branch" ]] && refToBundle="${repository}/${refToBundle}"

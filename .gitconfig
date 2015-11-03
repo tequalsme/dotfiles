@@ -4,8 +4,8 @@
 [core]
         eol = lf
         editor = vi
-        autocrlf = input
-        safecrlf = true
+        #autocrlf = input
+        #safecrlf = true
         excludesfile = ~/.gitignore
         # must first reset $LESS options, then specify options for git pager
         pager = less -+$LESS -FRXqi
@@ -28,18 +28,22 @@
         l = log --pretty='%h %ad %an %s' --date=local
         lg = log -p
         summ = log --name-only
+        tree = log --graph --decorate --oneline
         who = shortlog -s --
         changes=diff --name-status -r
         diffstat=diff --stat -r
         prune-all = !git remote | xargs -n 1 git remote prune
-        spull = !git-svn fetch && git-svn rebase
-        sup = !git-svn fetch && git-svn rebase
-        spush = !git-svn dcommit
-        upsub = !git submodule update --init
+        #spull = !git-svn fetch && git-svn rebase
+        #sup = !git-svn fetch && git-svn rebase
+        #spush = !git-svn dcommit
+        #upsub = !git submodule update --init
         lb = !git l ..`git rev-parse --abbrev-ref @{u}`
         la = !git l `git rev-parse --abbrev-ref @{u}`..
+        up = !git f && git merge --ff-only @{u}
 [push]
         default = simple
+[pull]
+        ff = only
 [diff]
         mnemonicprefix = 1
         renamed = copy

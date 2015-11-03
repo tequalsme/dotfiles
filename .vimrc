@@ -147,5 +147,12 @@ set mouse=
 
 filetype indent on
 
+" necessary when EDITOR=vim
+if has("autocmd")
+  autocmd filetype crontab setlocal nobackup nowritebackup
+endif
+
 colo elflord
 "colo slate
+
+"set nu

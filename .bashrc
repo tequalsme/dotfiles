@@ -155,6 +155,7 @@ alias ls="ls -G"
 alias l="ls -l"
 alias la="l -A"
 alias lt="l -t"
+alias lth="l -t | head"
 alias lat="l -At"
 alias l1="ls -1"
 alias p="pushd"
@@ -174,28 +175,42 @@ alias mvnfull='mvn clean install'
 alias mvnquick='mvn clean install -DskipTests=true'
 alias mvnfullt='mvnfull -T 2.0C'
 alias mvnquickt='mvnquick -T 2.0C'
+alias gradlefull='gradle clean build'
+alias gradlequick='gradle clean build -x test'
+
+alias gradlefull='gradle clean build install'
+alias gradlequick='gradle build install'
+
+alias jsonlint='python -m json.tool'
 
 # --------------------------
 # Functions
 # --------------------------
 
-# the following find functions skip all .git/.svn/target dirs
+# the following 'find' functions skips these dirs:
+#   .*
+#   target
+#   build
+#   out
+#   node_modules
 
 # recursive grep
 rgrep() {
-    find . \( -path "*/.git" -o -path "*/.svn" -o -path "*/target" \) -prune -o \
+    find . \( -path "*/.*" -o -path "*/target/*" -o -path "*/build" -o -path "*/out" -o -path "*/*.iml" -o -path "*/node_modules" \) -prune -o \
         -type f -print0 2> /dev/null | \
         xargs -0 grep "${@}"
 }
+
 # recursive grep of pom.xml files
 pomgrep() {
-    find . \( -path "*/.git" -o -path "*/.svn" -o -path "*/target" \) -prune -o \
+    find . \( -path "*/.*" -o -path "*/target/*" -o -path "*/build" -o -path "*/out" -o -path "*/*.iml" -o -path "*/node_modules" \) -prune -o \
         -type f -name pom.xml -print0 | \
         xargs -0 grep "${@}"
 }
-# open-ended find command, must tack on additional expression(s) and end with -print or -print0
-findsrc() {
-    find . \( -path "*/.git" -o -path "*/.svn" -o -path "*/target" \) -prune -o \
+
+# open-ended find+prune command, must append additional expression(s) with -print or -print0
+find2() {
+    find . \( -path "*/.*" -o -path "*/target/*" -o -path "*/build" -o -path "*/out" -o -path "*/*.iml" -o -path "*/node_modules" \) -prune -o \
         ${@}
 }
 
