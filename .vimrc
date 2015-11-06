@@ -143,6 +143,8 @@ set textwidth=125
 set nobackup
 set noundofile
 
+set mouse=
+
 filetype indent on
 
 colo elflord
