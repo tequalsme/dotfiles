@@ -165,6 +165,11 @@ alias ssh="ssh -AX"
 alias tf="tail -n 100 -f"
 alias x=exit
 
+if [ -f /usr/local/bin/vim ]; then
+    alias vi="/usr/local/bin/vim"
+    alias vim="/usr/local/bin/vim"
+fi
+
 alias mvnfull='mvn clean install'
 alias mvnquick='mvn clean install -DskipTests=true'
 alias mvnfullt='mvnfull -T 2.0C'
