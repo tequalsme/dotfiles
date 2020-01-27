@@ -74,8 +74,8 @@ pathmunge() {
 unset -f pathmunge
 
 # Opts
-export JAVA_OPTS="-Xms1024m -Xmx3076m"
-export MAVEN_OPTS="-Xms1024m -Xmx3076m"
+export JAVA_OPTS="-Xms1024m -Xmx4096m"
+export MAVEN_OPTS="-Xms1024m -Xmx4096m"
 
 # RVM
 [[ -d $HOME/.rvm ]] && RVM_HOME=$HOME/.rvm
