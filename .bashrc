@@ -182,9 +182,6 @@ alias mvnquickt='mvnquick -T 2.0C'
 alias gradlefull='gradle clean build'
 alias gradlequick='gradle clean build -x test'
 
-alias gradlefull='gradle clean build install'
-alias gradlequick='gradle build install'
-
 alias jsonlint='python -m json.tool'
 
 # --------------------------
