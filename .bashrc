@@ -94,14 +94,18 @@ if type -t __git_ps1 > /dev/null 2>&1; then
     GIT_PS1_SHOWSTASHSTATE=1
     GIT_PS1_SHOWUNTRACKEDFILES=1
     # color prompt with Git status (\w for full working dir, \W for basename)
-    PS1='\[\e[0m\]\u@\h:\[\e[34m\]\W\[\e[0m\]$(__git_ps1 "(%s)")\$ '
+    #PS1='\[\e[0m\]\u@\h:\[\e[34m\]\W\[\e[0m\]$(__git_ps1 "(%s)")\$ '
     # same prompt as above, without hostname
     #PS1='\[\e[0m\]\u:\[\e[34m\]\W\[\e[0m\]$(__git_ps1 "(%s)")\$ '
+    # same prompt as above, without color
+    PS1='\u:\W$(__git_ps1 "(%s)")\$ '
 else
     # color prompt without Git status
-    PS1='\[\e[0m\]\u@\h:\[\e[34m\]\W\[\e[0m\]\$ '
+    #PS1='\[\e[0m\]\u@\h:\[\e[34m\]\W\[\e[0m\]\$ '
     # same prompt as above, without hostname
     #PS1='\[\e[0m\]\u:\[\e[34m\]\W\[\e[0m\]\$ '
+    # same prompt as above, without color
+    PS1='\u:\W\$ '
 fi
 
 # Misc
